@@ -6,7 +6,7 @@
 package javaappeli;
 
 import admin.adminDashboard;
-import config.dbConnector;
+import config.config;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -23,21 +23,16 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
     }
-    public static boolean loginAcc(String user, String pass){
-    dbConnector connector = new dbConnector();
-
-try{
-       String query = "SELECT * FROM tbl_user WHERE u_username = '" + user + "' AND u_password = '" + pass + "'";
-        ResultSet resultSet = connector.getData(query);
-        
-        return resultSet.next();
-
-}catch (SQLException ex) {
-
-return false;
-
-}
-
+    public static boolean loginAcc(String user, String pass) {
+    config connector = new config();
+    try {
+        String query = "SELECT * FROM tbl_user WHERE u_username = ? AND u_password = ?";
+        ResultSet rs = connector.getData(query, user, pass);
+        return rs != null && rs.next(); // Check if a record exists
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        return false;
+    }
 }
 
     /**
