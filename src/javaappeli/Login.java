@@ -203,7 +203,21 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-           if(loginAcc(user.getText(), pass.getText())){
+        
+        String username = user.getText().trim();
+        String password = pass.getText().trim();
+
+    if (username.isEmpty() || password.isEmpty()) {
+        JOptionPane.showMessageDialog(
+            null,
+            "Username and Password must not be empty!",
+            "Error",
+            JOptionPane.WARNING_MESSAGE
+        );
+        return; 
+    }
+
+        if(loginAcc(user.getText(), pass.getText())){
     JOptionPane.showMessageDialog(null,"Login Success!");
         adminDashboard ads = new adminDashboard();
            ads.setVisible(true);
@@ -213,9 +227,7 @@ public class Login extends javax.swing.JFrame {
            }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
