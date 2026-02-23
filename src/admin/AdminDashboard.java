@@ -3,10 +3,6 @@ package admin;
 
 
 import config.session;
-import config.dbConnector;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import dhp.DHPMAIN;
 
@@ -16,33 +12,6 @@ public class AdminDashboard extends javax.swing.JFrame {
     public AdminDashboard() {
         initComponents();      
 }
-
- 
- private void logoutUser(String username) {
-    dbConnector connector = new dbConnector();
-    try (Connection con = connector.getConnection()) {
-        
-        
-        // Update log_status to "Inactive" and set logout_time
-        String updateQuery = "UPDATE tbl_log SET log_status = 'Inactive', logout_time = NOW() " +
-                             "WHERE u_username = ? AND log_status = 'Active'";
-        
-        try (PreparedStatement stmt = con.prepareStatement(updateQuery)) {
-            stmt.setString(1, username);
-            int updatedRows = stmt.executeUpdate();
-
-            if (updatedRows > 0) {
-                JOptionPane.showMessageDialog(null, "User " + username + " has logged out successfully!");
-            } else {
-                JOptionPane.showMessageDialog(null, "No active session found for " + username);
-            }
-        }
-
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error logging out: " + ex.getMessage());
-    }
-}
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

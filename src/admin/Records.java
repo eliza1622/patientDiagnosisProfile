@@ -181,9 +181,9 @@ public class Records extends javax.swing.JFrame {
 
     String sql = "SELECT u_id, u_fname, u_lname, u_username, u_email, u_status FROM tbl_user";
 
-    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dhpapp", "root", "");
-         PreparedStatement pst = con.prepareStatement(sql);
-         ResultSet rs = pst.executeQuery()) {
+   try (Connection con = DriverManager.getConnection("jdbc:sqlite:dhpapp.db");
+     PreparedStatement pst = con.prepareStatement(sql);
+     ResultSet rs = pst.executeQuery()) {
 
         while (rs.next()) {
             model.addRow(new Object[]{
@@ -214,8 +214,8 @@ private void deleteUser() {
     if (confirm == JOptionPane.YES_OPTION) {
         String sql = "DELETE FROM tbl_user WHERE u_id=?";
 
-        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/patientdiagnosisprofile", "root", "");
-             PreparedStatement pst = con.prepareStatement(sql)) {
+       try (Connection con = DriverManager.getConnection("jdbc:sqlite:patientdiagnosisprofile.db");
+     PreparedStatement pst = con.prepareStatement(sql)) {
 
             pst.setInt(1, userId);
             int affectedRows = pst.executeUpdate();

@@ -3,19 +3,9 @@ package admin;
 
 import config.session;
 import config.dbConnector;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Date;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import dhp.Signup;
 
 public class AdminDetails extends javax.swing.JFrame {
@@ -60,40 +50,6 @@ public class AdminDetails extends javax.swing.JFrame {
     }
        
      
-      
-
-
-
-    
-        public void logEvent(int userId, String username, String userType, String logDescription) {
-    dbConnector dbc = new dbConnector();
-    Connection con = dbc.getConnection();
-    PreparedStatement pstmt = null;
-
-    try {
-        String sql = "INSERT INTO tbl_log (u_id, u_username, login_time, u_type, log_status, log_description) VALUES (?, ?, ?, ?, ?, ?)";
-        pstmt = con.prepareStatement(sql);
-
-        pstmt.setInt(1, userId);
-        pstmt.setString(2, username);
-        pstmt.setTimestamp(3, new Timestamp(new Date().getTime()));
-        pstmt.setString(4, userType); 
-        pstmt.setString(5, "Active");
-        pstmt.setString(6, logDescription); 
-
-        pstmt.executeUpdate();
-        System.out.println("Log recorded successfully.");
-    } catch (SQLException e) {
-        System.out.println("Error recording log: " + e.getMessage());
-    } finally {
-        try {
-            if (pstmt != null) pstmt.close();
-            if (con != null) con.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
-        }
-    }
-}
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

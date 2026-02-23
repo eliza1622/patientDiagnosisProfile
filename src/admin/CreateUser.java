@@ -16,7 +16,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import admin.RecordsUser;
         
 
 
@@ -351,9 +350,13 @@ public class CreateUser extends javax.swing.JFrame {
             pst.setString(7, type);
 
             int rowsInserted = pst.executeUpdate();
+            new RecordsUser().setVisible(true);
+                    this.dispose();
         }
     } catch (Exception ex) {
         JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        new RecordsUser().setVisible(true);
+                    this.dispose();
     }
     }//GEN-LAST:event_addActionPerformed
 
@@ -449,8 +452,8 @@ try {
         // ✅ Corrected the column order in the UPDATE query
         String updateQuery = "UPDATE tbl_user SET u_fname = ?, u_lname = ?, u_username = ?, u_email = ?, u_password = ?, u_type = ?, u_status = ? WHERE u_id = ?";
 
-        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/patientdiagnosisprofile", "root", "");
-             PreparedStatement updatePst = con.prepareStatement(updateQuery)) {
+        try (Connection con = DriverManager.getConnection("jdbc:sqlite:patientdiagnosisprofile.db");
+     PreparedStatement updatePst = con.prepareStatement(updateQuery))  {
             
             
             String query = "SELECT * FROM tbl_user WHERE u_id = '"+sess.getUid()+"'";
