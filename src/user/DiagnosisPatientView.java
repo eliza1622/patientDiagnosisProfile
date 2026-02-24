@@ -44,7 +44,7 @@ public class DiagnosisPatientView extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tbltransaction.getModel();
         model.setRowCount(0);
 
-        // ✅ UPDATED row mapping (removed u_id)
+       
         while (rs.next()) {
             Object[] row = {
                 rs.getInt("d_id"),          // Diagnosis ID

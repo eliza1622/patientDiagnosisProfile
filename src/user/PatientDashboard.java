@@ -5,14 +5,8 @@
  */
 package user;
 
-import config.dbConnector;
 import config.session;
 import dhp.DHPMAIN;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 

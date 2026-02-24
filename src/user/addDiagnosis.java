@@ -242,7 +242,7 @@ public class addDiagnosis extends javax.swing.JFrame {
         try {
             
             try {
-                String query2 = "SELECT * FROM tbl_user WHERE u_fname = ? AND u_lname = ?";
+                    String query2 = "SELECT * FROM tbl_user WHERE u_fname = ? AND u_lname = ?";
                 PreparedStatement pstmt = connector.getConnection().prepareStatement(query2);
                 pstmt.setString(1, pn);  // Safely set the user ID
                 pstmt.setString(2, ln); 
@@ -255,7 +255,7 @@ public class addDiagnosis extends javax.swing.JFrame {
                     String firstName = resultSet.getString("u_fname");
                     String lastName = resultSet.getString("u_lname");
 
-                    System.out.println("Welcome " + firstName + " " + lastName + "!");
+                    System.out.println("Diagnosis for " + firstName + " " + lastName + " is added!!");
                 }
             } catch (SQLException ex) {
                 System.out.println("SQL Exception: " + ex);
@@ -284,7 +284,10 @@ public class addDiagnosis extends javax.swing.JFrame {
 
                 
                 JOptionPane.showMessageDialog(null, "Added successfully!");
-                System.out.println("Log sucessfully");
+                ViewDiagnosisDoctor vd = new ViewDiagnosisDoctor();
+                vd.setVisible(true);
+                this.dispose(); 
+                
             }
         } catch (SQLException ex) {
             System.out.println("SQL Exception: " + ex.getMessage());

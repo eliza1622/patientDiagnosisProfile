@@ -28,7 +28,7 @@ public class ViewDiagnosisDoctor extends javax.swing.JFrame {
     public void displayData() {
         try {
     dbConnector dbc = new dbConnector();
-    // Query: exclude 'Admin' users
+  
     ResultSet rs = dbc.getData("SELECT u_fname, u_lname, u_type FROM tbl_user WHERE u_type != 'Medical Staff' AND u_type != 'Admin'");
     user_table.setModel(DbUtils.resultSetToTableModel(rs));
     rs.close();

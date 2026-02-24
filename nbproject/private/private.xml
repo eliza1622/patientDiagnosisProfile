@@ -10,6 +10,7 @@
             <file>file:/C:/Users/techd/Desktop/gui/patientDiagnosisProfile/src/admin/Records.java</file>
             <file>file:/C:/Users/techd/Desktop/gui/patientDiagnosisProfile/src/admin/AdminDashboard.java</file>
             <file>file:/C:/Users/techd/Desktop/gui/patientDiagnosisProfile/src/user/pickPatient.java</file>
+            <file>file:/C:/Users/techd/Desktop/gui/patientDiagnosisProfile/src/dhp/Signup.java</file>
             <file>file:/C:/Users/techd/Desktop/gui/patientDiagnosisProfile/src/user/DoctorDashboard.java</file>
             <file>file:/C:/Users/techd/Desktop/gui/patientDiagnosisProfile/src/admin/CreateUser.java</file>
             <file>file:/C:/Users/techd/Desktop/gui/patientDiagnosisProfile/src/user/ViewDiagnosisDoctor.java</file>
@@ -17,6 +18,7 @@
             <file>file:/C:/Users/techd/Desktop/gui/patientDiagnosisProfile/src/admin/RecordsUser.java</file>
             <file>file:/C:/Users/techd/Desktop/gui/patientDiagnosisProfile/src/user/DoctorDetails.java</file>
             <file>file:/C:/Users/techd/Desktop/gui/patientDiagnosisProfile/src/user/PatientDashboard.java</file>
+            <file>file:/C:/Users/techd/Desktop/gui/patientDiagnosisProfile/src/user/DiagnosisPatientView.java</file>
         </group>
     </open-files>
 </project-private>
