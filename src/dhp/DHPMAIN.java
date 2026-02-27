@@ -92,13 +92,11 @@ public class DHPMAIN extends javax.swing.JFrame {
         right = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         check = new javax.swing.JCheckBox();
         password = new javax.swing.JPasswordField();
         jButton6 = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -127,7 +125,7 @@ public class DHPMAIN extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
@@ -148,9 +146,8 @@ public class DHPMAIN extends javax.swing.JFrame {
         jLabel4.setText("Password");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 350, 110, 40));
 
-        jButton5.setBackground(new java.awt.Color(255, 204, 204));
+        jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("SIGN UP");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,7 +157,7 @@ public class DHPMAIN extends javax.swing.JFrame {
         jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 450, 90, 30));
 
         right.setBackground(new java.awt.Color(255, 204, 204));
-        right.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        right.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         right.setToolTipText("");
         right.setPreferredSize(new java.awt.Dimension(400, 500));
         right.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -171,18 +168,7 @@ public class DHPMAIN extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         right.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 380, -1));
 
-        jLabel12.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("PATIENT DIAGNOSIS PROFILE");
-        right.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 380, -1));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/medicRecord.png"))); // NOI18N
-        jLabel6.setText("jLabel6");
-        right.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 50, -1, -1));
-
-        jPanel1.add(right, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 650));
+        jPanel1.add(right, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 650));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -207,7 +193,7 @@ public class DHPMAIN extends javax.swing.JFrame {
 
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 204, 204));
+        jButton6.setForeground(new java.awt.Color(255, 153, 153));
         jButton6.setText("LOGIN");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,15 +202,11 @@ public class DHPMAIN extends javax.swing.JFrame {
         });
         jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, 120, 30));
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Forgot Password? Click Here");
-        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel11MouseClicked(evt);
-            }
-        });
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 490, 200, -1));
+        jLabel12.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("PATIENT DIAGNOSIS PROFILE");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 180, 380, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -315,10 +297,6 @@ if (pass.isEmpty() || uname.isEmpty()) {
         }
     }//GEN-LAST:event_checkActionPerformed
 
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel11MouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -361,12 +339,10 @@ if (pass.isEmpty() || uname.isEmpty()) {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

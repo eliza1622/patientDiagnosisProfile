@@ -28,7 +28,7 @@ public class ViewDiagnosis extends javax.swing.JFrame {
    
   
    public void displayDiagnoses() {
-    String sql = "SELECT d_id, u_id, patient, diagnosis FROM tbl_diagnosis";
+    String sql = "SELECT d_id, doctor, patient, diagnosis FROM tbl_diagnosis";
 
     try (Connection conn = new dbConnector().getConnection();
          Statement stmt = conn.createStatement();
@@ -40,7 +40,7 @@ public class ViewDiagnosis extends javax.swing.JFrame {
         while (rs.next()) {
             Object[] row = {
                 rs.getInt("d_id"),
-                rs.getInt("u_id"),
+                rs.getString("doctor"),
                 rs.getString("patient"),
                 rs.getString("diagnosis")
             };
@@ -77,7 +77,10 @@ public class ViewDiagnosis extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         tbltransaction.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -92,7 +95,7 @@ public class ViewDiagnosis extends javax.swing.JFrame {
         ));
         jScrollPane6.setViewportView(tbltransaction);
 
-        jPanel4.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 690, 540));
+        jPanel4.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 690, 320));
 
         cancel1.setBackground(new java.awt.Color(0, 102, 102));
         cancel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -108,14 +111,14 @@ public class ViewDiagnosis extends javax.swing.JFrame {
                 cancel1ActionPerformed(evt);
             }
         });
-        jPanel4.add(cancel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 610, 110, 40));
+        jPanel4.add(cancel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 390, 110, 40));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("DIAGNOSIS");
         jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 660));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 450));
 
         pack();
         setLocationRelativeTo(null);

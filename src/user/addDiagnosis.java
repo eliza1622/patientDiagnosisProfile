@@ -8,12 +8,9 @@ package user;
 import config.dbConnector;
 import config.session;
 import dhp.DHPMAIN;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -57,7 +54,7 @@ public class addDiagnosis extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         acc_fname = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        doctor = new javax.swing.JTextField();
+        doc = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -73,6 +70,7 @@ public class addDiagnosis extends javax.swing.JFrame {
         });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setLayout(null);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -84,7 +82,7 @@ public class addDiagnosis extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(690, 150, 90, 40);
+        jLabel10.setBounds(600, 110, 90, 40);
 
         p_name.setEditable(false);
         p_name.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -122,7 +120,7 @@ public class addDiagnosis extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(570, 460, 130, 40);
+        jButton1.setBounds(440, 460, 130, 40);
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -133,19 +131,20 @@ public class addDiagnosis extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(710, 460, 130, 40);
+        jButton2.setBounds(570, 460, 130, 40);
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("ADD DIAGNOSIS");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 910, 60));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 740, 60));
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 930, 90);
+        jPanel2.setBounds(0, 0, 780, 90);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel7.setText("Input Diagnosis Here:");
@@ -188,13 +187,13 @@ public class addDiagnosis extends javax.swing.JFrame {
         jPanel1.add(jLabel11);
         jLabel11.setBounds(400, 220, 290, 16);
 
-        doctor.addActionListener(new java.awt.event.ActionListener() {
+        doc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doctorActionPerformed(evt);
+                docActionPerformed(evt);
             }
         });
-        jPanel1.add(doctor);
-        doctor.setBounds(400, 240, 290, 40);
+        jPanel1.add(doc);
+        doc.setBounds(400, 240, 290, 40);
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel12.setText("please enter the first name and last name of patient");
@@ -210,7 +209,9 @@ public class addDiagnosis extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 887, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,69 +230,71 @@ public class addDiagnosis extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        dbConnector db = new dbConnector();
-        session sess = session.getInstance();  // Capitalize if your class is Session
-        String pn = p_name.getText();
-        String ln = p_lname.getText();
-        String d = diagnose.getText();
-        String uname = sess.getUsername();
-        int userId = 0;
-        dbConnector connector = new dbConnector();
+            dbConnector db = new dbConnector();
+            session sess = session.getInstance();  // Capitalize if your class is Session
+            String pn = p_name.getText();
+            String ln = p_lname.getText();
+            String doctor = doc.getText();
+            String d = diagnose.getText();
+            String uname = sess.getUsername();
+            int userId = 0;
+            dbConnector connector = new dbConnector();
 
- 
-        try {
-            
+
             try {
-                    String query2 = "SELECT * FROM tbl_user WHERE u_fname = ? AND u_lname = ?";
-                PreparedStatement pstmt = connector.getConnection().prepareStatement(query2);
-                pstmt.setString(1, pn);  // Safely set the user ID
-                pstmt.setString(2, ln); 
 
-                ResultSet resultSet = pstmt.executeQuery();
+                try {
+                        String query2 = "SELECT * FROM tbl_user WHERE u_fname = ? AND u_lname = ?";
+                    PreparedStatement pstmt = connector.getConnection().prepareStatement(query2);
+                    pstmt.setString(1, pn);  // Safely set the user ID
+                    pstmt.setString(2, ln); 
 
-                if (resultSet.next()) {
-                    userId = resultSet.getInt("u_id");   // Update the outer userId correctly
-                    uname = resultSet.getString("u_username");
-                    String firstName = resultSet.getString("u_fname");
-                    String lastName = resultSet.getString("u_lname");
+                    ResultSet resultSet = pstmt.executeQuery();
 
-                    System.out.println("Diagnosis for " + firstName + " " + lastName + " is added!!");
+                    if (resultSet.next()) {
+                        userId = resultSet.getInt("u_id");   // Update the outer userId correctly
+                        uname = resultSet.getString("u_username");
+                        String firstName = resultSet.getString("u_fname");
+                        String lastName = resultSet.getString("u_lname");
+
+                        System.out.println("Diagnosis for " + firstName + " " + lastName + " is added!!");
+                    }
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception: " + ex);
                 }
-            } catch (SQLException ex) {
-                System.out.println("SQL Exception: " + ex);
-            }
 
-            
-            String insertQuery = "INSERT INTO tbl_diagnosis (doctor, patient, diagnosis,u_id) VALUES (?, ?, ?,?)";
-            PreparedStatement insertStmt = db.getConnection().prepareStatement(insertQuery);
-            insertStmt.setString(1, sess.getFname() + " " + sess.getLname());
-            insertStmt.setString(2, pn);
-            insertStmt.setString(3, d);
-            insertStmt.setInt(4, userId);
 
-            int rowsInserted = insertStmt.executeUpdate();
-            if (rowsInserted > 0) {
-                String selectQuery = "SELECT u_id FROM tbl_user WHERE u_username = ?";
-                try (PreparedStatement selectStmt = db.getConnection().prepareStatement(selectQuery)) {
-                    selectStmt.setString(1, uname);
+                String insertQuery = "INSERT INTO tbl_diagnosis (doctor, diagnosis, patient, u_id) VALUES (?, ?, ?, ?)";
+                PreparedStatement insertStmt = db.getConnection().prepareStatement(insertQuery);             
+                insertStmt.setString(1, doctor);          
+                insertStmt.setString(2, d);
+                insertStmt.setString(3, pn);
+                insertStmt.setInt(4, userId);
+                
 
-                    try (ResultSet resultSet = selectStmt.executeQuery()) {
-                        if (resultSet.next()) {
-                            userId = resultSet.getInt("u_id");
+                int rowsInserted = insertStmt.executeUpdate();
+                if (rowsInserted > 0) {
+                    String selectQuery = "SELECT u_id FROM tbl_user WHERE u_username = ?";
+                    try (PreparedStatement selectStmt = db.getConnection().prepareStatement(selectQuery)) {
+                        selectStmt.setString(1, uname);
+
+                        try (ResultSet resultSet = selectStmt.executeQuery()) {
+                            if (resultSet.next()) {
+                                userId = resultSet.getInt("u_id");
+                            }
                         }
                     }
-                }
 
-                
-                JOptionPane.showMessageDialog(null, "Added successfully!");
-                ViewDiagnosisDoctor vd = new ViewDiagnosisDoctor();
-                vd.setVisible(true);
-                this.dispose(); 
-                
+
+                    JOptionPane.showMessageDialog(null, "Added successfully!");
+                    ViewDiagnosisDoctor vd = new ViewDiagnosisDoctor();
+                    vd.setVisible(true);
+                    this.dispose(); 
+
+                }
+            } catch (SQLException ex) {
+                System.out.println("SQL Exception: " + ex.getMessage());
             }
-        } catch (SQLException ex) {
-            System.out.println("SQL Exception: " + ex.getMessage());
-        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -343,9 +346,9 @@ session sess = session.getInstance();
             this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel10MouseClicked
 
-    private void doctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorActionPerformed
+    private void docActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_docActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_doctorActionPerformed
+    }//GEN-LAST:event_docActionPerformed
 
     /**
      * @param args the command line arguments
@@ -386,7 +389,7 @@ session sess = session.getInstance();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel acc_fname;
     private javax.swing.JTextArea diagnose;
-    private javax.swing.JTextField doctor;
+    private javax.swing.JTextField doc;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

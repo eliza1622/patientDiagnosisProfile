@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package user;
+package admin;
 
+import user.*;
 import config.dbConnector;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,52 +17,48 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author milan
  */
-public class DiagnosisPatientView extends javax.swing.JFrame {
+public class AdminDiagnosisView extends javax.swing.JFrame {
 
     /**
      * Creates new form ViewTransaction
      */
-    public DiagnosisPatientView() {
+    public AdminDiagnosisView() {
         initComponents();
          displayDiagnoses();
     }         
    
-   public void displayDiagnoses() {
-    try {
-        dbConnector connector = new dbConnector();
-        Connection conn = connector.getConnection();
-        Statement stmt = conn.createStatement();
+    public void displayDiagnoses() {
+        try {
+            dbConnector connector = new dbConnector(); // Create an object first
+            Connection conn = connector.getConnection(); // Get the connection using the object
+            Statement stmt = conn.createStatement();
 
-        // ✅ UPDATED QUERY (joins tbl_user and adds Doc.)
-        String sql =
-            "SELECT d.d_id, CONCAT('Doc. ', u.u_fname) AS doctor, " +
-            "d.patient, d.diagnosis " +
-            "FROM tbl_diagnosis d " +
-            "JOIN tbl_user u ON d.u_id = u.u_id";
+            // Corrected SQL query based on your table structure
+            String sql = "SELECT d_id, u_id, patient, diagnosis, doctor "
+                    + "FROM tbl_diagnosis";
 
-        ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery(sql);
 
-        DefaultTableModel model = (DefaultTableModel) tbltransaction.getModel();
-        model.setRowCount(0);
+            DefaultTableModel model = (DefaultTableModel) tbltransaction.getModel();
+            model.setRowCount(0); // Clear existing data
 
-       
-        while (rs.next()) {
-            Object[] row = {
-                rs.getInt("d_id"),          // Diagnosis ID
-                rs.getString("doctor"),     // 👈 shows "Doc. Name"
-                rs.getString("patient"),
-                rs.getString("diagnosis")
-            };
-            model.addRow(row);
+            // Loop through the result set and add each row to the table model
+            while (rs.next()) {
+                Object[] row = {
+                    rs.getInt("d_id"), // Diagnosis ID
+                    rs.getInt("u_id"), // User ID
+                    rs.getString("patient"), // Patient
+                    rs.getString("diagnosis"), // Diagnosis
+                    rs.getString("doctor") // Doctor
+                };
+                model.addRow(row);
+            }
+
+            conn.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error loading diagnoses: " + e.getMessage());
         }
-
-        conn.close();
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null,
-                "Error loading diagnoses: " + e.getMessage());
     }
-}
 
 
 
@@ -89,7 +86,7 @@ public class DiagnosisPatientView extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel4.setBackground(new java.awt.Color(0, 102, 153));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tbltransaction.setModel(new javax.swing.table.DefaultTableModel(
@@ -100,7 +97,7 @@ public class DiagnosisPatientView extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "d_id", "Doctor's ID", "Patient", "Diagnosis", "Doctor"
+                "Diagnosis_ID", "User ID", "Patient", "Diagnosis", "Doctor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -162,7 +159,7 @@ public class DiagnosisPatientView extends javax.swing.JFrame {
     }//GEN-LAST:event_cancel1MouseClicked
 
     private void cancel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel1ActionPerformed
-PatientDashboard ed = new PatientDashboard();
+AdminDashboard ed = new AdminDashboard();
                 ed.setVisible(true);
                 this.dispose();
     }//GEN-LAST:event_cancel1ActionPerformed
@@ -188,14 +185,22 @@ PatientDashboard ed = new PatientDashboard();
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DiagnosisPatientView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminDiagnosisView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DiagnosisPatientView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminDiagnosisView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DiagnosisPatientView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminDiagnosisView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DiagnosisPatientView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminDiagnosisView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -208,7 +213,7 @@ PatientDashboard ed = new PatientDashboard();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DiagnosisPatientView().setVisible(true);
+                new AdminDiagnosisView().setVisible(true);
             }
         });
     }

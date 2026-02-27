@@ -296,13 +296,13 @@ public class PatientDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        DiagnosisPatientView dpv = new DiagnosisPatientView();
+        PatientDiagnosisView dpv = new PatientDiagnosisView();
                 dpv.setVisible(true);
                 this.dispose(); 
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-    DiagnosisPatientView dpv = new DiagnosisPatientView();
+    PatientDiagnosisView dpv = new PatientDiagnosisView();
                 dpv.setVisible(true);
                 this.dispose();            // TODO add your handling code here:
     }//GEN-LAST:event_jLabel7MouseClicked
