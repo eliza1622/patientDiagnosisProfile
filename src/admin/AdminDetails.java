@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import dhp.Signup;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 public class AdminDetails extends javax.swing.JFrame {
 
@@ -72,6 +75,7 @@ public class AdminDetails extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -95,7 +99,6 @@ public class AdminDetails extends javax.swing.JFrame {
         jLabel1.setBounds(30, 330, 130, 30);
 
         acc_email.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        acc_email.setEnabled(false);
         acc_email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 acc_emailActionPerformed(evt);
@@ -123,7 +126,6 @@ public class AdminDetails extends javax.swing.JFrame {
         jLabel4.setBounds(30, 450, 130, 30);
 
         acc_fname.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        acc_fname.setEnabled(false);
         acc_fname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 acc_fnameActionPerformed(evt);
@@ -133,7 +135,6 @@ public class AdminDetails extends javax.swing.JFrame {
         acc_fname.setBounds(190, 330, 340, 40);
 
         acc_lname.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        acc_lname.setEnabled(false);
         acc_lname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 acc_lnameActionPerformed(evt);
@@ -143,7 +144,6 @@ public class AdminDetails extends javax.swing.JFrame {
         acc_lname.setBounds(190, 390, 340, 40);
 
         acc_uname.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        acc_uname.setEnabled(false);
         acc_uname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 acc_unameActionPerformed(evt);
@@ -189,7 +189,7 @@ public class AdminDetails extends javax.swing.JFrame {
             }
         });
         jPanel2.add(cancel);
-        cancel.setBounds(240, 600, 130, 40);
+        cancel.setBounds(190, 560, 130, 40);
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 153));
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -205,6 +205,21 @@ public class AdminDetails extends javax.swing.JFrame {
         jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(jPanel5);
         jPanel5.setBounds(460, 110, 100, 700);
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton1.setText("SAVE");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1);
+        jButton1.setBounds(320, 560, 130, 40);
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 760));
 
@@ -265,6 +280,81 @@ public class AdminDetails extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel9MouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+// 1. Capture all fields for display/logic
+String id = acc_id.getText().trim();
+String email = acc_email.getText().trim();
+String username = acc_uname.getText().trim();
+String firstName = acc_fname.getText().trim();
+String lastName = acc_lname.getText().trim();
+String type = acc_type.getText(); // Displayed but not updated in DB
+
+// 2. Validation (Ensure the 4 update fields and ID aren't empty)
+if (id.isEmpty() || email.isEmpty() || username.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
+    JOptionPane.showMessageDialog(this, "All fields are required for the update.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+    return;
+}
+
+// 3. Email & Username Format Validation
+if (!email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
+    JOptionPane.showMessageDialog(this, "Invalid Email format!", "Error", JOptionPane.ERROR_MESSAGE);
+    return;
+}
+if (!username.matches("[a-zA-Z0-9_]{5,}")) {
+    JOptionPane.showMessageDialog(this, "Username must be 5+ characters.", "Error", JOptionPane.ERROR_MESSAGE);
+    return;
+}
+
+try {
+    dbConnector dbc = new dbConnector();
+    Connection conn = dbc.getConnection();
+
+    // 4. Check for duplicates (Email or Username) belonging to OTHER users
+    String checkQuery = "SELECT COUNT(*) FROM tbl_user WHERE (u_username = ? OR u_email = ?) AND u_id != ?";
+    try (PreparedStatement checkPst = conn.prepareStatement(checkQuery)) {
+        checkPst.setString(1, username);
+        checkPst.setString(2, email);
+        checkPst.setInt(3, Integer.parseInt(id));
+
+        try (ResultSet rs = checkPst.executeQuery()) {
+            if (rs.next() && rs.getInt(1) > 0) {
+                JOptionPane.showMessageDialog(this, "Username or Email already taken!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+    }
+
+    // 5. UPDATE only the 4 specific fields
+    String updateQuery = "UPDATE tbl_user SET u_email = ?, u_username = ?, u_fname = ?, u_lname = ? WHERE u_id = ?";
+    
+    try (PreparedStatement updatePst = conn.prepareStatement(updateQuery)) {
+        updatePst.setString(1, email);
+        updatePst.setString(2, username);
+        updatePst.setString(3, firstName);
+        updatePst.setString(4, lastName);
+        updatePst.setInt(5, Integer.parseInt(id)); // ID used only to locate the row
+
+        int rows = updatePst.executeUpdate();
+        if (rows > 0) {
+            JOptionPane.showMessageDialog(this, "Profile updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            new AdminDashboard().setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "User not found.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+} catch (SQLException ex) {
+    JOptionPane.showMessageDialog(this, "Database Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(this, "Invalid User ID.", "Error", JOptionPane.ERROR_MESSAGE);
+} // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -309,6 +399,7 @@ public class AdminDetails extends javax.swing.JFrame {
     private javax.swing.JLabel acc_type;
     public javax.swing.JTextField acc_uname;
     public javax.swing.JButton cancel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

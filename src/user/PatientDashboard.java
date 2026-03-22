@@ -5,8 +5,10 @@
  */
 package user;
 
+import config.dbConnector;
 import config.session;
 import dhp.DHPMAIN;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 
@@ -19,6 +21,35 @@ public class PatientDashboard extends javax.swing.JFrame {
         initComponents();
          
     }
+    public void refreshData() {
+    session sess = session.getInstance();
+    dbConnector dbc = new dbConnector();
+    
+    try {
+        // 1. Fetch the latest data from the database using the current User ID
+        String query = "SELECT * FROM tbl_user WHERE u_id = '" + sess.getUid() + "'";
+        java.sql.ResultSet rs = dbc.getData(query);
+        
+        if (rs.next()) {
+            // 2. Update the Session with the fresh database values
+            sess.setFname(rs.getString("u_fname"));
+            sess.setLname(rs.getString("u_lname"));
+            sess.setUsername(rs.getString("u_username"));
+            sess.setEmail(rs.getString("u_email"));
+            sess.setType(rs.getString("u_type"));
+            
+            // 3. Update the UI Labels on the Dashboard
+            acc_fname.setText("First Name: " + sess.getFname());
+            acc_lname.setText("Last Name: " + sess.getLname());
+            acc_uname.setText("Username: " + sess.getUsername());
+            acc_type.setText("Usertype: " + sess.getType());
+            acc_email.setText("Email: " + sess.getEmail());
+            acc_id.setText("User ID: " + sess.getUid());
+        }
+    } catch (SQLException ex) {
+        System.out.println("Refresh Error: " + ex.getMessage());
+    }
+}
  
  
 
@@ -247,24 +278,17 @@ public class PatientDashboard extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         session sess = session.getInstance();
-       if(sess.getUid() == 0)
-       {
-           
-           DHPMAIN l = new DHPMAIN();
-           l.setVisible(true);
-           this.dispose();
-           JOptionPane.showMessageDialog(null,"No Account, Login FIrst");
-       }else
-       {
-           acc_fname.setText("First Name: " + sess.getFname());
-           acc_lname.setText("Last Name: " + sess.getLname());
-           acc_uname.setText("Username: " + sess.getUsername());
-           acc_type.setText("Usertype: " + sess.getType());
-           acc_email.setText("Email: " + sess.getEmail());
-           acc_id.setText("User ID: " + sess.getUid());        
-           
-
-       }
+    
+    if(sess.getUid() == 0) {
+        DHPMAIN l = new DHPMAIN();
+        l.setVisible(true);
+        this.dispose();
+        JOptionPane.showMessageDialog(null,"No Account, Login First");
+    } else {
+        // This ensures every time you come back to the dashboard, 
+        // it grabs the newest data from the DB.
+        refreshData(); 
+    }
     }//GEN-LAST:event_formWindowActivated
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked

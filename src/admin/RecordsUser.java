@@ -276,7 +276,6 @@ public class RecordsUser extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         acc_id = new javax.swing.JLabel();
         acc_fname = new javax.swing.JLabel();
-        acc_lname = new javax.swing.JLabel();
         add = new javax.swing.JButton();
         update = new javax.swing.JButton();
         register1 = new javax.swing.JButton();
@@ -306,22 +305,17 @@ public class RecordsUser extends javax.swing.JFrame {
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Current User");
         jLabel15.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 200, 20));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 200, 20));
 
         acc_id.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         acc_id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         acc_id.setText("ID");
-        jPanel1.add(acc_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 200, 20));
+        jPanel1.add(acc_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 200, 20));
 
         acc_fname.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         acc_fname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         acc_fname.setText("ACC_FNAME");
-        jPanel1.add(acc_fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 200, 20));
-
-        acc_lname.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        acc_lname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        acc_lname.setText("ACC_LNAME");
-        jPanel1.add(acc_lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 200, -1));
+        jPanel1.add(acc_fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 200, 20));
 
         add.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add-user.png"))); // NOI18N
@@ -414,7 +408,6 @@ public class RecordsUser extends javax.swing.JFrame {
        {
            
           acc_fname.setText("" + sess.getFname());
-          acc_lname.setText("" + sess.getLname());
            acc_id.setText("" + sess.getUid());
        }        // TODO add your handling code here:  
     }//GEN-LAST:event_formWindowActivated
@@ -524,7 +517,6 @@ public class RecordsUser extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel acc_fname;
     private javax.swing.JLabel acc_id;
-    private javax.swing.JLabel acc_lname;
     private javax.swing.JButton add;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;

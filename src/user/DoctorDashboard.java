@@ -32,6 +32,35 @@ public class DoctorDashboard extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Error logging out: " + ex.getMessage());
     }
 }
+ public void refreshData() {
+    session sess = session.getInstance();
+    dbConnector dbc = new dbConnector();
+    
+    try {
+        // 1. Fetch the latest data from the database using the current User ID
+        String query = "SELECT * FROM tbl_user WHERE u_id = '" + sess.getUid() + "'";
+        java.sql.ResultSet rs = dbc.getData(query);
+        
+        if (rs.next()) {
+            // 2. Update the Session with the fresh database values
+            sess.setFname(rs.getString("u_fname"));
+            sess.setLname(rs.getString("u_lname"));
+            sess.setUsername(rs.getString("u_username"));
+            sess.setEmail(rs.getString("u_email"));
+            sess.setType(rs.getString("u_type"));
+            
+            // 3. Update the UI Labels on the Dashboard
+            acc_fname.setText("First Name: " + sess.getFname());
+            acc_lname.setText("Last Name: " + sess.getLname());
+            acc_uname.setText("Username: " + sess.getUsername());
+            acc_type.setText("Usertype: " + sess.getType());
+            acc_email.setText("Email: " + sess.getEmail());
+            acc_id.setText("User ID: " + sess.getUid());
+        }
+    } catch (SQLException ex) {
+        System.out.println("Refresh Error: " + ex.getMessage());
+    }
+}
 
 
     /**
@@ -87,7 +116,7 @@ public class DoctorDashboard extends javax.swing.JFrame {
         acc_id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         acc_id.setText("12345");
         jPanel3.add(acc_id);
-        acc_id.setBounds(0, 120, 300, 17);
+        acc_id.setBounds(0, 170, 300, 17);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -99,7 +128,7 @@ public class DoctorDashboard extends javax.swing.JFrame {
         jPanel2.add(u_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 100));
 
         jPanel3.add(jPanel2);
-        jPanel2.setBounds(100, 20, 110, 100);
+        jPanel2.setBounds(100, 60, 110, 100);
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logout.png"))); // NOI18N
@@ -117,38 +146,38 @@ public class DoctorDashboard extends javax.swing.JFrame {
         acc_type.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         acc_type.setText("patient");
         jPanel3.add(acc_type);
-        acc_type.setBounds(0, 150, 290, 20);
+        acc_type.setBounds(0, 190, 290, 20);
 
         acc_fname.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         acc_fname.setForeground(new java.awt.Color(255, 255, 255));
         acc_fname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         acc_fname.setText("first name");
         jPanel3.add(acc_fname);
-        acc_fname.setBounds(0, 250, 300, 40);
+        acc_fname.setBounds(0, 260, 300, 40);
 
         acc_lname.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         acc_lname.setForeground(new java.awt.Color(255, 255, 255));
         acc_lname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         acc_lname.setText("last name");
         jPanel3.add(acc_lname);
-        acc_lname.setBounds(0, 280, 300, 40);
+        acc_lname.setBounds(0, 300, 300, 40);
 
         acc_uname.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         acc_uname.setForeground(new java.awt.Color(255, 255, 255));
         acc_uname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         acc_uname.setText("username");
         jPanel3.add(acc_uname);
-        acc_uname.setBounds(0, 180, 300, 30);
+        acc_uname.setBounds(0, 220, 300, 30);
 
         acc_email.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         acc_email.setForeground(new java.awt.Color(255, 255, 255));
         acc_email.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         acc_email.setText("email");
         jPanel3.add(acc_email);
-        acc_email.setBounds(0, 320, 300, 30);
+        acc_email.setBounds(0, 340, 300, 30);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(660, 0, 320, 590);
+        jPanel3.setBounds(660, 0, 300, 590);
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -273,25 +302,20 @@ public class DoctorDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        session sess = session.getInstance();
-       if(sess.getUid() == 0)
-       {
-           
-           DHPMAIN l = new DHPMAIN();
-           l.setVisible(true);
-           this.dispose();
-           JOptionPane.showMessageDialog(null,"No Account, Login FIrst");
-       }else
-       {
-           acc_fname.setText("First Name: " + sess.getFname());
-           acc_lname.setText("Last Name: " + sess.getLname());
-           acc_uname.setText("Username: " + sess.getUsername());
-           acc_type.setText("Usertype: " + sess.getType());
-           acc_email.setText("Email: " + sess.getEmail());
-           acc_id.setText("User ID: " + sess.getUid());        
-           
+                                 
+    session sess = session.getInstance();
+    
+    if(sess.getUid() == 0) {
+        DHPMAIN l = new DHPMAIN();
+        l.setVisible(true);
+        this.dispose();
+        JOptionPane.showMessageDialog(null,"No Account, Login First");
+    } else {
+        // This ensures every time you come back to the dashboard, 
+        // it grabs the newest data from the DB.
+        refreshData(); 
+    }
 
-       }
     }//GEN-LAST:event_formWindowActivated
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
