@@ -7,15 +7,51 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import dhp.Signup;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class AdminDetails extends javax.swing.JFrame {
-
+    
+    String selectedImagePath = "";
+    
     public AdminDetails() {
         initComponents();
+        loadUserProfile();
     }
+    
+  private void loadUserProfile() {
+    dbConnector dbc = new dbConnector();
+    session sess = session.getInstance();
+
+    String query = "SELECT u_image FROM tbl_user WHERE u_id = ?";
+
+    try (Connection conn = dbc.getConnection();
+         PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+        pstmt.setInt(1, sess.getUid());
+        ResultSet rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+            String imagePath = rs.getString("u_image");
+
+            if (imagePath != null && !imagePath.isEmpty()) {
+                ImageIcon icon = new ImageIcon(imagePath);
+                image.setIcon(icon);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace(); // Log the error
+        JOptionPane.showMessageDialog(this, "Error loading profile image: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}   
   public boolean updateCheck(){
         
      dbConnector dbc = new dbConnector();
@@ -58,24 +94,35 @@ public class AdminDetails extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jProgressBar2 = new javax.swing.JProgressBar();
+        jProgressBar3 = new javax.swing.JProgressBar();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        image = new javax.swing.JLabel();
+        acc_id = new javax.swing.JLabel();
+        acc_type = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        acc_email = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         acc_fname = new javax.swing.JTextField();
         acc_lname = new javax.swing.JTextField();
         acc_uname = new javax.swing.JTextField();
-        jPanel9 = new javax.swing.JPanel();
-        acc_id = new javax.swing.JLabel();
-        acc_type = new javax.swing.JLabel();
+        acc_email = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         cancel = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+
+        jLabel6.setText("jLabel6");
+
+        jLabel7.setText("jLabel7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -92,66 +139,6 @@ public class AdminDetails extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("First Name :");
-        jPanel2.add(jLabel1);
-        jLabel1.setBounds(30, 330, 130, 30);
-
-        acc_email.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        acc_email.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                acc_emailActionPerformed(evt);
-            }
-        });
-        jPanel2.add(acc_email);
-        acc_email.setBounds(190, 510, 340, 40);
-
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Email :");
-        jPanel2.add(jLabel2);
-        jLabel2.setBounds(30, 510, 130, 30);
-
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Last Name :");
-        jPanel2.add(jLabel3);
-        jLabel3.setBounds(30, 390, 130, 30);
-
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Username :");
-        jPanel2.add(jLabel4);
-        jLabel4.setBounds(30, 450, 130, 30);
-
-        acc_fname.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        acc_fname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                acc_fnameActionPerformed(evt);
-            }
-        });
-        jPanel2.add(acc_fname);
-        acc_fname.setBounds(190, 330, 340, 40);
-
-        acc_lname.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        acc_lname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                acc_lnameActionPerformed(evt);
-            }
-        });
-        jPanel2.add(acc_lname);
-        acc_lname.setBounds(190, 390, 340, 40);
-
-        acc_uname.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        acc_uname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                acc_unameActionPerformed(evt);
-            }
-        });
-        jPanel2.add(acc_uname);
-        acc_uname.setBounds(190, 450, 340, 40);
-
         jPanel9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -159,25 +146,75 @@ public class AdminDetails extends javax.swing.JFrame {
             }
         });
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        image.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel9.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 200, 180));
+
         jPanel2.add(jPanel9);
-        jPanel9.setBounds(190, 60, 220, 200);
+        jPanel9.setBounds(30, 40, 220, 200);
 
         acc_id.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         acc_id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         acc_id.setText("ID");
         jPanel2.add(acc_id);
-        acc_id.setBounds(240, 270, 110, 20);
+        acc_id.setBounds(30, 240, 220, 20);
 
         acc_type.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         acc_type.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         acc_type.setText("Type");
         jPanel2.add(acc_type);
-        acc_type.setBounds(240, 290, 110, 20);
+        acc_type.setBounds(30, 260, 220, 20);
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("First Name :");
+
+        acc_fname.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        acc_fname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acc_fnameActionPerformed(evt);
+            }
+        });
+
+        acc_lname.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        acc_lname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acc_lnameActionPerformed(evt);
+            }
+        });
+
+        acc_uname.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        acc_uname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acc_unameActionPerformed(evt);
+            }
+        });
+
+        acc_email.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        acc_email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acc_emailActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Last Name :");
+
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Username :");
+
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Email :");
 
         cancel.setBackground(new java.awt.Color(255, 255, 255));
         cancel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cancel.setForeground(new java.awt.Color(27, 57, 77));
-        cancel.setText("Cancel");
+        cancel.setText("CANCEL");
         cancel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cancelMouseClicked(evt);
@@ -188,23 +225,6 @@ public class AdminDetails extends javax.swing.JFrame {
                 cancelActionPerformed(evt);
             }
         });
-        jPanel2.add(cancel);
-        cancel.setBounds(190, 560, 130, 40);
-
-        jPanel3.setBackground(new java.awt.Color(0, 102, 153));
-        jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel2.add(jPanel3);
-        jPanel3.setBounds(30, 0, 100, 200);
-
-        jPanel4.setBackground(new java.awt.Color(0, 102, 153));
-        jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel2.add(jPanel4);
-        jPanel4.setBounds(30, 110, 530, 90);
-
-        jPanel5.setBackground(new java.awt.Color(0, 102, 153));
-        jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel2.add(jPanel5);
-        jPanel5.setBounds(460, 110, 100, 700);
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton1.setText("SAVE");
@@ -218,10 +238,81 @@ public class AdminDetails extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1);
-        jButton1.setBounds(320, 560, 130, 40);
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 760));
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("ADMIN PROFILE");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(acc_fname, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(acc_lname, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(acc_uname, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(acc_email, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36))
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(acc_fname, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(acc_lname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(acc_uname, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(acc_email, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26))
+        );
+
+        jPanel2.add(jPanel6);
+        jPanel6.setBounds(270, 40, 550, 350);
+
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton2.setText("SELECT IMAGE");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2);
+        jButton2.setBounds(60, 310, 160, 33);
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 430));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -246,6 +337,11 @@ public class AdminDetails extends javax.swing.JFrame {
             acc_uname.setText("" + sess.getUsername());
             acc_type.setText("" + sess.getType());
             acc_id.setText("" + sess.getUid());  
+            // --- ADD THIS TO LOAD THE IMAGE ON START ---
+    if (sess.getPic() != null && !sess.getPic().isEmpty()) {
+        image.setIcon(resizeImage(sess.getPic(), null));
+        image.setText("");
+    }
         }// TODO add your handling code here:
     }//GEN-LAST:event_formWindowActivated
 
@@ -285,75 +381,130 @@ public class AdminDetails extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-// 1. Capture all fields for display/logic
-String id = acc_id.getText().trim();
-String email = acc_email.getText().trim();
-String username = acc_uname.getText().trim();
-String firstName = acc_fname.getText().trim();
-String lastName = acc_lname.getText().trim();
-String type = acc_type.getText(); // Displayed but not updated in DB
+                                   
+    // 1. Capture all fields
+    String id = acc_id.getText().trim();
+    String email = acc_email.getText().trim();
+    String username = acc_uname.getText().trim();
+    String firstName = acc_fname.getText().trim();
+    String lastName = acc_lname.getText().trim();
+    
+    // Get session for logging
+    config.session sess = config.session.getInstance();
 
-// 2. Validation (Ensure the 4 update fields and ID aren't empty)
-if (id.isEmpty() || email.isEmpty() || username.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
-    JOptionPane.showMessageDialog(this, "All fields are required for the update.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-    return;
-}
+    // 2. Validation
+    if (id.isEmpty() || email.isEmpty() || username.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "All fields are required for the update.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-// 3. Email & Username Format Validation
-if (!email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
-    JOptionPane.showMessageDialog(this, "Invalid Email format!", "Error", JOptionPane.ERROR_MESSAGE);
-    return;
-}
-if (!username.matches("[a-zA-Z0-9_]{5,}")) {
-    JOptionPane.showMessageDialog(this, "Username must be 5+ characters.", "Error", JOptionPane.ERROR_MESSAGE);
-    return;
-}
+    // 3. Format Validation
+    if (!email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
+        JOptionPane.showMessageDialog(this, "Invalid Email format!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    if (!username.matches("[a-zA-Z0-9_]{5,}")) {
+        JOptionPane.showMessageDialog(this, "Username must be 5+ characters.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-try {
-    dbConnector dbc = new dbConnector();
-    Connection conn = dbc.getConnection();
+    try {
+        dbConnector dbc = new dbConnector();
+        Connection conn = dbc.getConnection();
 
-    // 4. Check for duplicates (Email or Username) belonging to OTHER users
-    String checkQuery = "SELECT COUNT(*) FROM tbl_user WHERE (u_username = ? OR u_email = ?) AND u_id != ?";
-    try (PreparedStatement checkPst = conn.prepareStatement(checkQuery)) {
-        checkPst.setString(1, username);
-        checkPst.setString(2, email);
-        checkPst.setInt(3, Integer.parseInt(id));
+        // 4. Duplicate Check
+        String checkQuery = "SELECT COUNT(*) FROM tbl_user WHERE (u_username = ? OR u_email = ?) AND u_id != ?";
+        try (PreparedStatement checkPst = conn.prepareStatement(checkQuery)) {
+            checkPst.setString(1, username);
+            checkPst.setString(2, email);
+            checkPst.setInt(3, Integer.parseInt(id));
 
-        try (ResultSet rs = checkPst.executeQuery()) {
-            if (rs.next() && rs.getInt(1) > 0) {
-                JOptionPane.showMessageDialog(this, "Username or Email already taken!", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
+            try (ResultSet rs = checkPst.executeQuery()) {
+                if (rs.next() && rs.getInt(1) > 0) {
+                    JOptionPane.showMessageDialog(this, "Username or Email already taken!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
             }
         }
+
+        // 5. UPDATE Execution
+        String updateQuery = "UPDATE tbl_user SET u_email = ?, u_username = ?, u_fname = ?, u_lname = ? WHERE u_id = ?";
+        
+        try (PreparedStatement updatePst = conn.prepareStatement(updateQuery)) {
+            updatePst.setString(1, email);
+            updatePst.setString(2, username);
+            updatePst.setString(3, firstName);
+            updatePst.setString(4, lastName);
+            updatePst.setInt(5, Integer.parseInt(id));
+
+            int rows = updatePst.executeUpdate();
+            if (rows > 0) {
+                // --- SYSTEM LOGGING ---
+                String logAction = "Admin updated user profile: " + username + " (ID: " + id + ")";
+                dbc.recordLog(sess.getUsername(), sess.getType(), logAction);
+                // ----------------------
+
+                JOptionPane.showMessageDialog(this, "Profile updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                new AdminDashboard().setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "User not found.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, "Database Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Invalid User ID.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    // 5. UPDATE only the 4 specific fields
-    String updateQuery = "UPDATE tbl_user SET u_email = ?, u_username = ?, u_fname = ?, u_lname = ? WHERE u_id = ?";
-    
-    try (PreparedStatement updatePst = conn.prepareStatement(updateQuery)) {
-        updatePst.setString(1, email);
-        updatePst.setString(2, username);
-        updatePst.setString(3, firstName);
-        updatePst.setString(4, lastName);
-        updatePst.setInt(5, Integer.parseInt(id)); // ID used only to locate the row
+    }//GEN-LAST:event_jButton1MouseClicked
 
-        int rows = updatePst.executeUpdate();
-        if (rows > 0) {
-            JOptionPane.showMessageDialog(this, "Profile updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            new AdminDashboard().setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "User not found.", "Error", JOptionPane.ERROR_MESSAGE);
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "jpeg", "png"));
+
+    int result = fileChooser.showOpenDialog(this);
+    if (result == JFileChooser.APPROVE_OPTION) {
+        File selectedFile = fileChooser.getSelectedFile();
+        File destinationFolder = new File("src/images/");
+        
+        if (!destinationFolder.exists()) {
+            destinationFolder.mkdirs(); 
+        }
+
+        // Rename file based on ID to prevent overwriting
+        String fileName = acc_id.getText() + "_" + selectedFile.getName();
+        File destinationFile = new File(destinationFolder, fileName);
+
+        try {
+            Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            selectedImagePath = "src/images/" + fileName;
+
+            // 1. Update the UI Label immediately
+            image.setIcon(resizeImage(destinationFile.getAbsolutePath(), null));
+            image.setText(""); 
+
+            // 2. DATABASE UPDATE
+            dbConnector dbc = new dbConnector();
+            String sql = "UPDATE tbl_user SET u_image = '" + selectedImagePath + "' WHERE u_id = '" + acc_id.getText() + "'";
+            
+            if(dbc.insertData(sql)){
+                // --- CRITICAL CHANGE HERE ---
+                // Update the session so it displays when the window is activated/reopened
+                session sess = session.getInstance();
+                sess.setPic(selectedImagePath); 
+                // ----------------------------
+                
+                JOptionPane.showMessageDialog(this, "Profile Picture Updated!");
+            }
+            
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }
-
-} catch (SQLException ex) {
-    JOptionPane.showMessageDialog(this, "Database Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-} catch (NumberFormatException e) {
-    JOptionPane.showMessageDialog(this, "Invalid User ID.", "Error", JOptionPane.ERROR_MESSAGE);
-} // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseClicked
+    
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -399,16 +550,36 @@ try {
     private javax.swing.JLabel acc_type;
     public javax.swing.JTextField acc_uname;
     public javax.swing.JButton cancel;
+    private javax.swing.JLabel image;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JProgressBar jProgressBar2;
+    private javax.swing.JProgressBar jProgressBar3;
     // End of variables declaration//GEN-END:variables
+
+public javax.swing.ImageIcon resizeImage(String imgPath, byte[] pic) {
+    javax.swing.ImageIcon myImage = null;
+    if (imgPath != null) {
+        myImage = new javax.swing.ImageIcon(imgPath);
+    } else {
+        myImage = new javax.swing.ImageIcon(pic);
+    }
+    java.awt.Image img = myImage.getImage();
+    // 200x180 matches your AbsoluteConstraints in jPanel9
+    java.awt.Image newImg = img.getScaledInstance(200, 180, java.awt.Image.SCALE_SMOOTH);
+    return new javax.swing.ImageIcon(newImg);
+}
 }

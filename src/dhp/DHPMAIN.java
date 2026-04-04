@@ -92,6 +92,7 @@ public class DHPMAIN extends javax.swing.JFrame {
         right = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         check = new javax.swing.JCheckBox();
         password = new javax.swing.JPasswordField();
@@ -167,6 +168,10 @@ public class DHPMAIN extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         right.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 380, -1));
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/medicRecord.png"))); // NOI18N
+        right.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 50, -1, -1));
 
         jPanel1.add(right, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 650));
 
@@ -341,6 +346,7 @@ if (pass.isEmpty() || uname.isEmpty()) {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;

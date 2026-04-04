@@ -302,8 +302,8 @@ public class CreateUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-       dbConnector dbc = new dbConnector();
-    session sess = session.getInstance();  // Logged-in admin
+     dbConnector dbc = new dbConnector();
+    session sess = session.getInstance();  // The admin currently logged in
 
     String fname = fn.getText().trim();
     String lname = ln.getText().trim();
@@ -313,13 +313,8 @@ public class CreateUser extends javax.swing.JFrame {
     String status = stat.getSelectedItem().toString().trim();
     String type = ut.getSelectedItem().toString();
 
-   
-
-   
-
     // Validation
-    if (fname.isEmpty() || lname.isEmpty() || uname.isEmpty() || pass.isEmpty() ||
-        email.isEmpty() ) {
+    if (fname.isEmpty() || lname.isEmpty() || uname.isEmpty() || pass.isEmpty() || email.isEmpty() ) {
         JOptionPane.showMessageDialog(null, "Please fill all fields.");
         return;
     } else if (pass.length() < 8) {
@@ -329,12 +324,10 @@ public class CreateUser extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Enter a valid email address.");
         return;
     } else if (duplicateCheck(uname, email)) {
-        return; // Already shown warning inside duplicateCheck
+        return; 
     }
 
     try {
-       
-        // Insert user into DB
         String insertQuery = "INSERT INTO tbl_user (u_fname, u_lname, u_username, u_status, u_password, u_email, u_type) "
                            + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
@@ -350,13 +343,24 @@ public class CreateUser extends javax.swing.JFrame {
             pst.setString(7, type);
 
             int rowsInserted = pst.executeUpdate();
+            
+            if (rowsInserted > 0) {
+                // --- SYSTEM LOGGING START ---
+                // We log WHO did the action (sess) and WHAT they created (uname)
+                String actionDescription = "Admin added new user: " + uname + " (" + type + ")";
+                dbc.recordLog(sess.getUsername(), sess.getType(), actionDescription);
+                // --- SYSTEM LOGGING END ---
+
+                JOptionPane.showMessageDialog(null, "User added successfully!");
+            }
+
             new RecordsUser().setVisible(true);
-                    this.dispose();
+            this.dispose();
         }
     } catch (Exception ex) {
         JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         new RecordsUser().setVisible(true);
-                    this.dispose();
+        this.dispose();
     }
     }//GEN-LAST:event_addActionPerformed
 

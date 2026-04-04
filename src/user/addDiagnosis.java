@@ -229,72 +229,52 @@ public class addDiagnosis extends javax.swing.JFrame {
     }//GEN-LAST:event_p_nameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+                                        
+    // 1. Initialize the tools we need
+    config.dbConnector db = new config.dbConnector(); // This fixes the 'db' error
+    config.session sess = config.session.getInstance(); // This fixes the 'sess' error
+    
+    String pn = p_name.getText();
+    String ln = p_lname.getText();
+    String doctor = doc.getText();
+    String d = diagnose.getText();
+    
+    // We need a variable for the User ID (assuming you get it from session or query)
+    int userId = sess.getUid(); 
+
+    try (java.sql.Connection con = db.getConnection()) {
         
-            dbConnector db = new dbConnector();
-            session sess = session.getInstance();  // Capitalize if your class is Session
-            String pn = p_name.getText();
-            String ln = p_lname.getText();
-            String doctor = doc.getText();
-            String d = diagnose.getText();
-            String uname = sess.getUsername();
-            int userId = 0;
-            dbConnector connector = new dbConnector();
+        String insertQuery = "INSERT INTO tbl_diagnosis (doctor, diagnosis, patient, u_id) VALUES (?, ?, ?, ?)";
+        
+        // 2. Create the insertStmt (This fixes the 'insertStmt' error)
+        try (java.sql.PreparedStatement insertStmt = con.prepareStatement(insertQuery)) {
+            insertStmt.setString(1, doctor);          
+            insertStmt.setString(2, d);
+            insertStmt.setString(3, pn);
+            insertStmt.setInt(4, userId);
 
-
-            try {
-
-                try {
-                        String query2 = "SELECT * FROM tbl_user WHERE u_fname = ? AND u_lname = ?";
-                    PreparedStatement pstmt = connector.getConnection().prepareStatement(query2);
-                    pstmt.setString(1, pn);  // Safely set the user ID
-                    pstmt.setString(2, ln); 
-
-                    ResultSet resultSet = pstmt.executeQuery();
-
-                    if (resultSet.next()) {
-                        userId = resultSet.getInt("u_id");   // Update the outer userId correctly
-                        uname = resultSet.getString("u_username");
-                        String firstName = resultSet.getString("u_fname");
-                        String lastName = resultSet.getString("u_lname");
-
-                        System.out.println("Diagnosis for " + firstName + " " + lastName + " is added!!");
-                    }
-                } catch (SQLException ex) {
-                    System.out.println("SQL Exception: " + ex);
-                }
-
-
-                String insertQuery = "INSERT INTO tbl_diagnosis (doctor, diagnosis, patient, u_id) VALUES (?, ?, ?, ?)";
-                PreparedStatement insertStmt = db.getConnection().prepareStatement(insertQuery);             
-                insertStmt.setString(1, doctor);          
-                insertStmt.setString(2, d);
-                insertStmt.setString(3, pn);
-                insertStmt.setInt(4, userId);
+            int rowsInserted = insertStmt.executeUpdate();
+            
+            if (rowsInserted > 0) {
+                // 3. Record the log using the info from session
+                String user = sess.getUsername();
+                String type = sess.getType(); 
                 
+                db.recordLog(user, type, "Added diagnosis for: " + pn + " " + ln);
 
-                int rowsInserted = insertStmt.executeUpdate();
-                if (rowsInserted > 0) {
-                    String selectQuery = "SELECT u_id FROM tbl_user WHERE u_username = ?";
-                    try (PreparedStatement selectStmt = db.getConnection().prepareStatement(selectQuery)) {
-                        selectStmt.setString(1, uname);
-
-                        try (ResultSet resultSet = selectStmt.executeQuery()) {
-                            if (resultSet.next()) {
-                                userId = resultSet.getInt("u_id");
-                            }
-                        }
-                    }
-
-
-                    JOptionPane.showMessageDialog(null, "Added successfully!");
-                    ViewDiagnosisDoctor vd = new ViewDiagnosisDoctor();
-                    vd.setVisible(true);
-                    this.dispose(); 
-
-                }
-            } catch (SQLException ex) {
-                System.out.println("SQL Exception: " + ex.getMessage());
+                javax.swing.JOptionPane.showMessageDialog(null, "Added successfully!");
+                
+                // Open the next view
+                ViewDiagnosisDoctor vd = new ViewDiagnosisDoctor();
+                vd.setVisible(true);
+                this.dispose(); 
             }
+        }
+        
+    } catch (java.sql.SQLException ex) {
+        System.out.println("SQL Error: " + ex.getMessage());
+    }
+ 
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

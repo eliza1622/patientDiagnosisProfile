@@ -78,29 +78,25 @@ public class Signup extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jPanel2 = new javax.swing.JPanel();
-        jPanel41 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        fname = new javax.swing.JTextField();
-        name = new javax.swing.JLabel();
-        lname = new javax.swing.JTextField();
-        age = new javax.swing.JLabel();
-        username = new javax.swing.JTextField();
-        address = new javax.swing.JLabel();
-        password = new javax.swing.JPasswordField();
-        dob = new javax.swing.JLabel();
-        check = new javax.swing.JCheckBox();
-        dob1 = new javax.swing.JLabel();
-        Cpassword = new javax.swing.JPasswordField();
-        email = new javax.swing.JTextField();
-        phone = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        age = new javax.swing.JLabel();
+        name = new javax.swing.JLabel();
+        fname = new javax.swing.JTextField();
+        lname = new javax.swing.JTextField();
+        address = new javax.swing.JLabel();
+        username = new javax.swing.JTextField();
+        dob = new javax.swing.JLabel();
+        password = new javax.swing.JPasswordField();
+        dob1 = new javax.swing.JLabel();
+        Cpassword = new javax.swing.JPasswordField();
+        phone = new javax.swing.JLabel();
+        email = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        check = new javax.swing.JCheckBox();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -113,19 +109,9 @@ public class Signup extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 204, 204));
         setResizable(false);
 
-        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel41.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel41.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel41.setPreferredSize(new java.awt.Dimension(400, 500));
-        jPanel41.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel41.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, -1, -1));
-        jPanel41.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
-        jPanel41.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, -1, -1));
-
-        jPanel2.add(jPanel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 520, 500));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -146,156 +132,10 @@ public class Signup extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel12)
-                .addGap(22, 22, 22))
+            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
         );
 
-        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, 510, 60));
-
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        fname.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        fname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        fname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fnameActionPerformed(evt);
-            }
-        });
-
-        name.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        name.setText("FIRSTNAME");
-
-        lname.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        lname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        lname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lnameActionPerformed(evt);
-            }
-        });
-
-        age.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        age.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        age.setText("LASTNAME");
-
-        username.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        username.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernameActionPerformed(evt);
-            }
-        });
-
-        address.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        address.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        address.setText("USERNAME");
-
-        password.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        dob.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        dob.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        dob.setText("PASSWORD");
-
-        check.setBackground(new java.awt.Color(255, 255, 255));
-        check.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        check.setText("show");
-        check.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkActionPerformed(evt);
-            }
-        });
-
-        dob1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        dob1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        dob1.setText("RE-ENTER PASSWORD");
-
-        Cpassword.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        Cpassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        email.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        email.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailActionPerformed(evt);
-            }
-        });
-
-        phone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        phone.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        phone.setText("EMAIL");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(dob1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Cpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(fname, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(age, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(dob, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lname, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(check)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(age, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dob, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(check, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dob1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Cpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
-
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 140, 510, 280));
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 40, 510, 60));
 
         jButton2.setBackground(new java.awt.Color(255, 204, 204));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -310,11 +150,11 @@ public class Signup extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 440, 130, 60));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 410, 130, 60));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel1.setText("SIGN UP FORM");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, 320, 40));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, 320, 40));
 
         jButton3.setBackground(new java.awt.Color(255, 204, 204));
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -329,13 +169,101 @@ public class Signup extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 440, 136, 60));
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 410, 136, 60));
+
+        age.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        age.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        age.setText("LASTNAME");
+        jPanel2.add(age, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 200, 160, 30));
+
+        name.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        name.setText("FIRSTNAME");
+        jPanel2.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, 160, 30));
+
+        fname.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        fname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        fname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fnameActionPerformed(evt);
+            }
+        });
+        jPanel2.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 160, 250, 30));
+
+        lname.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        lname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lnameActionPerformed(evt);
+            }
+        });
+        jPanel2.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 200, 250, 30));
+
+        address.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        address.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        address.setText("USERNAME");
+        jPanel2.add(address, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 240, 160, 30));
+
+        username.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameActionPerformed(evt);
+            }
+        });
+        jPanel2.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 240, 250, 30));
+
+        dob.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        dob.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        dob.setText("PASSWORD");
+        jPanel2.add(dob, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 280, 160, 30));
+
+        password.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanel2.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 280, 250, 30));
+
+        dob1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        dob1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        dob1.setText("RE-ENTER PASSWORD");
+        jPanel2.add(dob1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, 160, 30));
+
+        Cpassword.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        Cpassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanel2.add(Cpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 320, 250, 30));
+
+        phone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        phone.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        phone.setText("EMAIL");
+        jPanel2.add(phone, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 360, 150, 30));
+
+        email.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailActionPerformed(evt);
+            }
+        });
+        jPanel2.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 360, 250, 30));
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gif/signup.jpg"))); // NOI18N
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-60, 0, 810, 570));
+
+        check.setBackground(new java.awt.Color(255, 255, 255));
+        check.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        check.setText("show");
+        check.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkActionPerformed(evt);
+            }
+        });
+        jPanel2.add(check, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 270, -1, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1106, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1115, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -361,51 +289,55 @@ public class Signup extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(fname.getText().isEmpty() || lname.getText().isEmpty() || email.getText().isEmpty() || username.getText().isEmpty() ||
-            password.getText().isEmpty()) {  // Check if answer is empty
-            JOptionPane.showMessageDialog(null, "All fields are required!");
-        } else if(password.getText().length() < 6) {
-            JOptionPane.showMessageDialog(null, "Password must be at least 8 characters.");
-            password.setText("");
-        } else if(duplicateCheck()) {
-            System.out.println("Duplicate Exists!");
-        } else {
-            dbConnector dbc = new dbConnector();
-            try {
-                // 🔐 Hash security answer
+       if (fname.getText().isEmpty() || lname.getText().isEmpty() || email.getText().isEmpty() || username.getText().isEmpty() || password.getText().isEmpty()) {
+    // Check if any field is empty
+    JOptionPane.showMessageDialog(null, "All fields are required!");
+} else if (password.getText().length() < 8) { 
+    // Updated to 8 to match your message string
+    JOptionPane.showMessageDialog(null, "Password must be at least 8 characters.");
+    password.setText("");
+} else if (duplicateCheck()) {
+    System.out.println("Duplicate Exists!");
+} else {
+    dbConnector dbc = new dbConnector();
+    try {
+        // ✅ Added u_image to the columns and an extra '?' to the values
+        String query = "INSERT INTO tbl_user (u_fname, u_lname, u_email, u_username, u_password, u_status, u_image) "
+                     + "VALUES (?, ?, ?, ?, ?, 'Pending', ?)";
 
-                // ✅ Added balance field
-                String query = "INSERT INTO tbl_user (u_fname, u_lname, u_email, u_username, u_password, u_status) "
-                + "VALUES ( ?, ?, ?, ?, ?, 'Pending')";
+        try (Connection con = dbc.getConnection();
+             PreparedStatement stmt = con.prepareStatement(query, java.sql.Statement.RETURN_GENERATED_KEYS)) {
+            
+            stmt.setString(1, fname.getText());
+            stmt.setString(2, lname.getText());
+            stmt.setString(3, email.getText());
+            stmt.setString(4, username.getText());
+            stmt.setString(5, password.getText());
+            
+            // ✅ This leaves the image path empty string in the database
+            stmt.setString(6, ""); 
 
-                try (Connection con = dbc.getConnection();
-                    PreparedStatement stmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-                    stmt.setString(1, fname.getText());
-                    stmt.setString(2, lname.getText());
-                    stmt.setString(3, email.getText());
-                    stmt.setString(4, username.getText());
-                    stmt.setString(5, password.getText());
-
-                    int rowsInserted = stmt.executeUpdate();
-                    if (rowsInserted > 0) {
-                        try (ResultSet rs = stmt.getGeneratedKeys()) {
-                            if (rs.next()) {
-                                int userId = rs.getInt(1); // The auto-generated user ID
-                                JOptionPane.showMessageDialog(null, "Registration Successful!");
-                                DHPMAIN lfr = new DHPMAIN();
-                                lfr.setVisible(true);
-                                this.dispose();
-                            }
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Registration Failed. Try again!");
+            int rowsInserted = stmt.executeUpdate();
+            if (rowsInserted > 0) {
+                try (ResultSet rs = stmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        JOptionPane.showMessageDialog(null, "Registration Successful!");
+                        
+                        // Redirect to your Main/Login Frame
+                        DHPMAIN lfr = new DHPMAIN();
+                        lfr.setVisible(true);
+                        this.dispose();
                     }
                 }
-            } catch (SQLException ex) {
-                System.out.println("Error: " + ex.getMessage());
+            } else {
+                JOptionPane.showMessageDialog(null, "Registration Failed. Try again!");
             }
         }
-        // TODO add your handling code here:
+    } catch (SQLException ex) {
+        System.out.println("Error: " + ex.getMessage());
+        JOptionPane.showMessageDialog(null, "Database Error: " + ex.getMessage());
+    }
+}
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
@@ -490,14 +422,10 @@ public class Signup extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel41;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField lname;
     private javax.swing.JLabel name;

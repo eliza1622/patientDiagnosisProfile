@@ -1,41 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package config;
-
 
 public class session {
     
     private static session instance;
         
-        private int uid;
-        private int age;
-        private String fname;
-        private String lname;
-        private String username;
-        private String email;
-        private String type;
+    private int uid;
+    private int age;
+    private String fname;
+    private String lname;
+    private String username;
+    private String email;
+    private String type;
+    // --- ADDED THIS VARIABLE ---
+    private String pic; 
         
-      private session(){ 
-      }    
+    private session(){ 
+    }    
 
     public static synchronized session getInstance() {
         if (instance == null){
-        instance = new session();
-        
+            instance = new session();
         }
-         return instance;   
+        return instance;   
     }
 
     public static boolean isInstanceEmpty () {
       return instance == null;   
-
     }
 
-    
-    
     public int getUid() {
         return uid;
     }
@@ -91,5 +83,13 @@ public class session {
     public void setType(String type) {
         this.type = type;
     }
-    
+
+    // --- ADDED THESE GETTER AND SETTER FOR THE IMAGE ---
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
 }

@@ -66,11 +66,15 @@ public class ViewDiagnosis extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tbltransaction = new javax.swing.JTable();
         cancel1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -97,7 +101,7 @@ public class ViewDiagnosis extends javax.swing.JFrame {
 
         jPanel4.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 690, 320));
 
-        cancel1.setBackground(new java.awt.Color(0, 102, 102));
+        cancel1.setBackground(new java.awt.Color(255, 255, 255));
         cancel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         cancel1.setForeground(new java.awt.Color(27, 57, 77));
         cancel1.setText("Cancel");
@@ -111,12 +115,21 @@ public class ViewDiagnosis extends javax.swing.JFrame {
                 cancel1ActionPerformed(evt);
             }
         });
-        jPanel4.add(cancel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 390, 110, 40));
+        jPanel4.add(cancel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 390, 110, 40));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("DIAGNOSIS");
         jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton3.setText("DELETE");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 390, 110, 40));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 450));
 
@@ -134,6 +147,60 @@ public class ViewDiagnosis extends javax.swing.JFrame {
         ru.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cancel1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+                                        
+    // 1. Get the selected row from your JTable (named tbltransaction)
+    int rowIndex = tbltransaction.getSelectedRow();
+    
+    if (rowIndex < 0) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Please select a record from the table first!");
+        return;
+    }
+
+    // 2. Get data from the table model
+    // Column 0 is d_id, Column 2 is Patient Name
+    String idToDelete = tbltransaction.getModel().getValueAt(rowIndex, 0).toString();
+    String patientName = tbltransaction.getModel().getValueAt(rowIndex, 2).toString();
+
+    // 3. Confirmation Dialog
+    int confirm = javax.swing.JOptionPane.showConfirmDialog(null, 
+            "Are you sure you want to delete the diagnosis for " + patientName + "?", 
+            "Confirm Deletion", javax.swing.JOptionPane.YES_NO_OPTION);
+
+    if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+        config.dbConnector db = new config.dbConnector();
+        config.session sess = config.session.getInstance();
+
+        try (java.sql.Connection con = db.getConnection()) {
+            
+            // ✅ Database table: tbl_diagnosis | Primary Key: d_id
+            String deleteQuery = "DELETE FROM tbl_diagnosis WHERE d_id = ?";
+            
+            try (java.sql.PreparedStatement deleteStmt = con.prepareStatement(deleteQuery)) {
+                deleteStmt.setString(1, idToDelete);
+
+                int rowsDeleted = deleteStmt.executeUpdate();
+                
+                if (rowsDeleted > 0) {
+                    // 4. Record the action for your Capstone Audit Log
+                    db.recordLog(sess.getUsername(), sess.getType(), "Deleted diagnosis ID: " + idToDelete + " for " + patientName);
+
+                    javax.swing.JOptionPane.showMessageDialog(null, "Successfully deleted from records!");
+                    
+                    // 5. Refresh the UI
+                    ViewDiagnosisDoctor vd = new ViewDiagnosisDoctor();
+                    vd.setVisible(true);
+                    this.dispose(); 
+                }
+            }
+        } catch (java.sql.SQLException ex) {
+            System.out.println("SQL Error: " + ex.getMessage());
+            javax.swing.JOptionPane.showMessageDialog(null, "Delete Error: " + ex.getMessage());
+        }
+    }
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,6 +246,8 @@ public class ViewDiagnosis extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton cancel1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane6;

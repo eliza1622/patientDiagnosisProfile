@@ -19,7 +19,11 @@ public class PatientDashboard extends javax.swing.JFrame {
      */
     public PatientDashboard() {
         initComponents();
-         
+             jTextArea1.setText("The Doctor Dashboard in the Patient Diagnosis Profile System is a centralized interface designed to help healthcare professionals efficiently manage patient information and medical records. ");
+
+    jTextArea1.setLineWrap(true);
+    jTextArea1.setWrapStyleWord(true);
+    jTextArea1.setEditable(false);    
     }
     public void refreshData() {
     session sess = session.getInstance();
@@ -39,12 +43,12 @@ public class PatientDashboard extends javax.swing.JFrame {
             sess.setType(rs.getString("u_type"));
             
             // 3. Update the UI Labels on the Dashboard
-            acc_fname.setText("First Name: " + sess.getFname());
-            acc_lname.setText("Last Name: " + sess.getLname());
-            acc_uname.setText("Username: " + sess.getUsername());
-            acc_type.setText("Usertype: " + sess.getType());
-            acc_email.setText("Email: " + sess.getEmail());
-            acc_id.setText("User ID: " + sess.getUid());
+            acc_fname.setText("FIRST NAME: " + sess.getFname());
+            acc_lname.setText("LAST NAME: " + sess.getLname());
+            acc_uname.setText("USERNAME: " + sess.getUsername());
+            acc_type.setText("" + sess.getType());
+            acc_email.setText("EMAIL: " + sess.getEmail());
+            acc_id.setText("USER ID: " + sess.getUid());
         }
     } catch (SQLException ex) {
         System.out.println("Refresh Error: " + ex.getMessage());
@@ -74,15 +78,22 @@ public class PatientDashboard extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         acc_type = new javax.swing.JLabel();
-        acc_fname = new javax.swing.JLabel();
-        acc_lname = new javax.swing.JLabel();
-        acc_uname = new javax.swing.JLabel();
-        acc_email = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
         acc_id = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        acc_email = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        acc_fname = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        acc_lname = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        acc_uname = new javax.swing.JLabel();
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/view.png"))); // NOI18N
 
@@ -95,17 +106,19 @@ public class PatientDashboard extends javax.swing.JFrame {
         });
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 26)); // NOI18N
         jLabel1.setText("WELCOME TO PATIENT DIAGNOSIS PROFILE");
-        jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 3, 20)); // NOI18N
         jLabel4.setText("PATIENT DASHBOARD");
-        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 510, 20));
+        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 510, 20));
 
         jPanel4.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel4MouseClicked(evt);
@@ -124,7 +137,7 @@ public class PatientDashboard extends javax.swing.JFrame {
         });
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 70));
 
-        jPanel6.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 190, 70));
+        jPanel6.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, 190, 70));
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -147,9 +160,10 @@ public class PatientDashboard extends javax.swing.JFrame {
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
         );
 
-        jPanel6.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, 140, 120));
+        jPanel6.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, 140, 120));
 
         jPanel5.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -172,7 +186,7 @@ public class PatientDashboard extends javax.swing.JFrame {
             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
-        jPanel6.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 350, -1, -1));
+        jPanel6.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 450, -1, -1));
 
         jPanel7.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -199,9 +213,17 @@ public class PatientDashboard extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel6.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 140, 120));
+        jPanel6.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, 140, 120));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 570, 220));
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         acc_type.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -210,30 +232,7 @@ public class PatientDashboard extends javax.swing.JFrame {
         acc_type.setText("patient");
         jPanel1.add(acc_type, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 250, 40));
 
-        acc_fname.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        acc_fname.setForeground(new java.awt.Color(51, 51, 51));
-        acc_fname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        acc_fname.setText("first name");
-        jPanel1.add(acc_fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 250, 30));
-
-        acc_lname.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        acc_lname.setForeground(new java.awt.Color(51, 51, 51));
-        acc_lname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        acc_lname.setText("last name");
-        jPanel1.add(acc_lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 250, -1));
-
-        acc_uname.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        acc_uname.setForeground(new java.awt.Color(51, 51, 51));
-        acc_uname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        acc_uname.setText("username");
-        jPanel1.add(acc_uname, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 250, -1));
-
-        acc_email.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        acc_email.setForeground(new java.awt.Color(51, 51, 51));
-        acc_email.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        acc_email.setText("email");
-        jPanel1.add(acc_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 250, 30));
-
+        jButton2.setBackground(new java.awt.Color(255, 204, 204));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logout.png"))); // NOI18N
         jButton2.setText("LOG-OUT");
@@ -243,10 +242,15 @@ public class PatientDashboard extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 160, 60));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, 160, 60));
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-user-100.png"))); // NOI18N
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 120));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 140, 120));
 
         acc_id.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -255,21 +259,103 @@ public class PatientDashboard extends javax.swing.JFrame {
         acc_id.setText("12345");
         jPanel1.add(acc_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 140, -1));
 
+        jPanel8.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        acc_email.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        acc_email.setForeground(new java.awt.Color(51, 51, 51));
+        acc_email.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        acc_email.setText("email");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(acc_email, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(acc_email, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 190, 40));
+
+        jPanel9.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        acc_fname.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        acc_fname.setForeground(new java.awt.Color(51, 51, 51));
+        acc_fname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        acc_fname.setText("first name");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(acc_fname, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(acc_fname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 190, 40));
+
+        jPanel10.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        acc_lname.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        acc_lname.setForeground(new java.awt.Color(51, 51, 51));
+        acc_lname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        acc_lname.setText("last name");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(acc_lname, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(acc_lname, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 190, 40));
+
+        jPanel11.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        acc_uname.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        acc_uname.setForeground(new java.awt.Color(51, 51, 51));
+        acc_uname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        acc_uname.setText("username");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(acc_uname, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(acc_uname, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 190, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 654, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -307,10 +393,18 @@ public class PatientDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        DHPMAIN m= new DHPMAIN();
-        JOptionPane.showMessageDialog(null, "log-out Success! ");
-        m.setVisible(true);
-        this.dispose();
+                                    
+    config.dbConnector db = new config.dbConnector();
+    config.session sess = config.session.getInstance();
+
+    // The word "logged out" triggers the logic to put the time in the Logout column
+    db.recordLog(sess.getUsername(), sess.getType(), "User logged out");
+
+    JOptionPane.showMessageDialog(null, "Log-out Success!");
+    DHPMAIN m = new DHPMAIN();
+    m.setVisible(true);
+    this.dispose();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
@@ -388,12 +482,19 @@ public class PatientDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
